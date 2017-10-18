@@ -7,7 +7,7 @@ import java.security.CodeSource;
 import java.security.ProtectionDomain;
 
 /**
- * 获取各种路径
+ * 获取路径工具类
  * 
  * @author hellozjf
  *

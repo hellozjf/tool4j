@@ -15,6 +15,9 @@ import java.util.Date;
  *
  */
 public class DateUtils {
+    
+    public static final String UTC = "UTC";         // 0时区
+    public static final String CST = "CST";         // +8时区
 
     /**
      * 将LocalDate转化为Date
@@ -58,6 +61,28 @@ public class DateUtils {
     public static Date getCurrentDate(int hourOffset) {
         LocalDateTime localDateTime = LocalDateTime.now();
         return changeLocalDateTimeToDate(localDateTime, hourOffset);
+    }
+    
+    /**
+     * 将2017-10-22T21:21:21Z这样的0时区时间转化为Date
+     * 
+     * @param instantString 类似于2017-10-22T21:21:21Z这样的0时区时间
+     * @return Date
+     */
+    public static Date changeInstantStringToDate(String instantString) {
+        Instant instant = Instant.parse(instantString);
+        return Date.from(instant);
+    }
+    
+    /**
+     * 将Date转化为2017-10-22T21:21:21Z这样的0时区时间字符串
+     * 
+     * @param date 要转化的Date类型
+     * @return 类似2017-10-22T21:21:21Z这样的0时区时间字符串
+     */
+    public static String changeDateToInstantString(Date date) {
+        Instant instant = date.toInstant();
+        return instant.toString();
     }
 
     private DateUtils() {

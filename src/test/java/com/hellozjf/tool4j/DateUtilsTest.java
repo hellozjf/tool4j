@@ -2,6 +2,7 @@ package com.hellozjf.tool4j;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -57,6 +58,27 @@ public class DateUtilsTest {
         calendarFromDate.setTime(date);
 
         assertCalendarEqual(calendarFromNow, calendarFromDate);
+    }
+    
+    @Test 
+    public void changeInstantStringToDateTest() {
+        String instantString = "2017-10-22T03:56:30.123Z";
+        LocalDateTime localDateTime = LocalDateTime.of(2017, 10, 22, 11, 56, 30, 123);
+        Date date1 = DateUtils.changeInstantStringToDate(instantString);
+        Date date2 = DateUtils.changeLocalDateTimeToDate(localDateTime, 8);
+        LOG.debug("\n{}\n{}", date1, date2);
+        assertEquals(date1.toString(), date2.toString());
+    }
+    
+    @Test
+    public void changeDateToInstantStringTest() {
+        Date date = DateUtils.getCurrentDate(8);
+        String s1 = DateUtils.changeDateToInstantString(date);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        format.setTimeZone(TimeZone.getTimeZone(DateUtils.UTC));
+        String s2 = format.format(date);
+        LOG.debug("\n{}\n{}", s1, s2);
+        assertEquals(s1, s2);
     }
 
     private void assertCalendarEqual(Calendar c1, Calendar c2) {

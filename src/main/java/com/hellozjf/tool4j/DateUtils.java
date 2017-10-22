@@ -2,6 +2,7 @@ package com.hellozjf.tool4j;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 
@@ -27,8 +28,36 @@ public class DateUtils {
      * @return 0时区的Date
      */
     public static Date changeLocalDateToDate(LocalDate localDate, int hourOffset) {
-        Instant instant = localDate.atStartOfDay().toInstant(ZoneOffset.ofHours(hourOffset));
+        LocalDateTime localDateTime = localDate.atStartOfDay();
+        return changeLocalDateTimeToDate(localDateTime, 8);
+    }
+
+    /**
+     * 将LocalDateTime转化为Date
+     * 
+     * 转化的时候时间默认为0:00:00
+     * 
+     * @param localDateTime
+     *            日期和时间
+     * @param hourOffset
+     *            时区
+     * @return 0时区的Date
+     */
+    public static Date changeLocalDateTimeToDate(LocalDateTime localDateTime, int hourOffset) {
+        Instant instant = localDateTime.toInstant(ZoneOffset.ofHours(hourOffset));
         return Date.from(instant);
+    }
+
+    /**
+     * 获取当前的Date
+     * 
+     * @param hourOffset
+     *            时区
+     * @return 0时区的Date
+     */
+    public static Date getCurrentDate(int hourOffset) {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        return changeLocalDateTimeToDate(localDateTime, hourOffset);
     }
 
     private DateUtils() {

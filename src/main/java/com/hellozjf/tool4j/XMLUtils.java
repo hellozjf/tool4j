@@ -17,7 +17,7 @@ public class XMLUtils {
         try {
             document = reader.read(stringReader);
         } catch (DocumentException e1) {
-            e1.printStackTrace();
+//            e1.printStackTrace();
             return false;
         }
         SAXValidator validator = new SAXValidator();

@@ -25,7 +25,9 @@ public class ByteBufferUtils {
      */
     public static ByteBuffer getByteBuffer(String str, String encoding) {
         try {
-            return ByteBuffer.wrap(str.getBytes(encoding));
+            ByteBuffer buffer = ByteBuffer.wrap(str.getBytes(encoding));
+            buffer.position(buffer.capacity());
+            return buffer;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return null;
